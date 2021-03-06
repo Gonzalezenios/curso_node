@@ -32,10 +32,21 @@ const getEmpleadoById = (id, callback) => {
         callback(null, empleado);
         return;
     }
-    callback("El empleado no existe");
+    callback(`El empleado con id ${id} no existe`);
 }
 
-const id = 4;
+const getSueldoById = (id, callback) => {
+
+    const sueldo = sueldos.find( (s) => s.id === id);
+
+    if (sueldo) {
+        callback(null, sueldo);
+       return;
+    }
+    callback(`El sueldo con id ${id} no existe`);
+}
+
+const id = 3;
 
 getEmpleadoById(id, (error, empleado) => {
 
@@ -46,5 +57,13 @@ getEmpleadoById(id, (error, empleado) => {
         
     }
 
-    console.log(`EL empleado: ${empleado.nombre} ...`);
+    getSueldoById(id, (error, sueldo) => {
+        if (error) {
+            console.log('Error...!');
+            console.log(error);
+            return;
+        }
+
+        console.log(`EL empleado: ${empleado.nombre} tiene un sueldo de ${sueldo.sueldo}`);
+    });
 });
