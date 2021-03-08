@@ -50,7 +50,7 @@ const getEmpleadoById = async (id) => {
     }
 };
 
-const id = 5;
+const id = 1;
 
 const getDatosCompletosEmpleado = async (id) => {
 
@@ -58,7 +58,12 @@ const getDatosCompletosEmpleado = async (id) => {
 
         const empleado = await getEmpleadoById(id);
         const sueldo = await getSueldoById(id);
-        return `El empleado con id ${id} es ${empleado.nombre} y tiene un sueldo de ${sueldo.sueldo}`;
+        //return `El empleado con id ${id} es ${empleado.nombre} y tiene un sueldo de ${sueldo.sueldo}`;
+        return {
+            id,
+            nombre: empleado.nombre,
+            sueldo: sueldo.sueldo
+        }
 
     } catch (err) {
         throw err;
@@ -67,5 +72,5 @@ const getDatosCompletosEmpleado = async (id) => {
 }
 
 getDatosCompletosEmpleado(id)
-    .then(mensaje => {console.log(mensaje)})
+    .then(data => {console.log(`El empleado con id ${data.id} es ${data.nombre} y tiene un sueldo de ${data.sueldo}`)})
     .catch(err => console.log(err.message));
